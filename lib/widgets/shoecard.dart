@@ -7,8 +7,13 @@ class ShoeCard extends StatelessWidget {
     required this.name,
     required this.price,
   }) : super(key: key);
-  final String name; //! name of the product
-  final double price; //! price of the product
+
+  /// Name of the product
+  final String name;
+
+  /// Price of the product
+  final double price;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +23,9 @@ class ShoeCard extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(25)),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(25),
+            ),
             height: 230,
             child: Row(
               children: [
@@ -32,10 +39,11 @@ class ShoeCard extends StatelessWidget {
                         Text(
                           name,
                           style: TextStyle(
-                              fontFamily: 'Inter',
-                              color: Color(0xFF000000),
-                              fontSize: 25,
-                              fontWeight: FontWeight.w400),
+                            fontFamily: 'Inter',
+                            color: Color(0xFF000000),
+                            fontSize: 25,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                         SizedBox(
                           height: 2,
@@ -50,10 +58,11 @@ class ShoeCard extends StatelessWidget {
                             Text(
                               '$price lei',
                               style: TextStyle(
-                                  fontFamily: 'Inter',
-                                  color: Color(0xFF000000),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500),
+                                fontFamily: 'Inter',
+                                color: Color(0xFF000000),
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ],
                         )
@@ -62,38 +71,39 @@ class ShoeCard extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 103,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(11),
-                          bottomRight: Radius.circular(11),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 103,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(11),
+                            bottomRight: Radius.circular(11),
+                          ),
                         ),
                       ),
-                    ),
-                    SvgPicture.asset(
-                        'assets/svg/isNotLiked.svg', //: 'assets/svg/isLiked.svg',
-                        height: 50,
-                        width: 50,
-                        color: Colors.red),
-                    Container(
-                      height: 36,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(11),
-                          topRight: Radius.circular(11),
+                      SvgPicture.asset(
+                          'assets/svg/isNotLiked.svg', //: 'assets/svg/isLiked.svg',
+                          height: 50,
+                          width: 50,
+                          color: Colors.red),
+                      Container(
+                        height: 36,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(11),
+                            topRight: Radius.circular(11),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ))
+                    ],
+                  ),
+                )
               ],
             ),
           ),
@@ -106,8 +116,9 @@ class ShoeCard extends StatelessWidget {
                   height: 112,
                   width: 181,
                   decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(15)),
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                 ),
                 Positioned(
                   bottom: 0,
@@ -129,7 +140,7 @@ class ShoeCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

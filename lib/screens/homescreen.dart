@@ -40,10 +40,11 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   'Home',
                   style: TextStyle(
-                      fontFamily: 'Inter',
-                      color: Colors.black,
-                      fontSize: 45,
-                      fontWeight: FontWeight.w600),
+                    fontFamily: 'Inter',
+                    color: Colors.black,
+                    fontSize: 45,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               leadingWidth: 60,
@@ -52,8 +53,9 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   padding: EdgeInsets.all(7),
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15)),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                   child: SvgPicture.asset('assets/svg/menu.svg'),
                 ),
               ),
@@ -62,10 +64,11 @@ class _HomePageState extends State<HomePage> {
                 child: Text(
                   'Discover \nshoes weekly',
                   style: TextStyle(
-                      fontFamily: 'Inter',
-                      color: Color(0xFF6C6DDE),
-                      fontSize: 45,
-                      fontWeight: FontWeight.w400),
+                    fontFamily: 'Inter',
+                    color: Color(0xFF6C6DDE),
+                    fontSize: 45,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ),
@@ -76,7 +79,8 @@ class _HomePageState extends State<HomePage> {
               toolbarHeight: 40,
               flexibleSpace: ListView.builder(
                 physics: BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
                 scrollDirection: Axis.horizontal,
                 itemCount: category.length,
                 itemBuilder: (context, i) {
@@ -93,12 +97,13 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             category[i],
                             style: TextStyle(
-                                fontFamily: 'Inter',
-                                color: Color(0xFF000000),
-                                fontSize: 25,
-                                fontWeight: selectedIndex == i
-                                    ? FontWeight.bold
-                                    : FontWeight.w400),
+                              fontFamily: 'Inter',
+                              color: Color(0xFF000000),
+                              fontSize: 25,
+                              fontWeight: selectedIndex == i
+                                  ? FontWeight.bold
+                                  : FontWeight.w400,
+                            ),
                           ),
                         ],
                       ),
@@ -108,12 +113,15 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SliverList(
-              delegate: SliverChildBuilderDelegate((_, i) {
-                return ShoeCard(
-                  name: 'Rebook\nNano X Black',
-                  price: 267.99,
-                );
-              }, childCount: 5),
+              delegate: SliverChildBuilderDelegate(
+                (_, i) {
+                  return ShoeCard(
+                    name: 'Rebook\nNano X Black',
+                    price: 267.99,
+                  );
+                },
+                childCount: 5,
+              ),
             ),
           ],
         ),
