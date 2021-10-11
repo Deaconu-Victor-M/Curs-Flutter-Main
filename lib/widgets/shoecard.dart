@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shoeapp/models/sneaker.dart';
 
 class ShoeCard extends StatelessWidget {
-  const ShoeCard({
-    Key? key,
-    required this.name,
-    required this.price,
-  }) : super(key: key);
+  const ShoeCard({Key? key, required this.sneaker}) : super(key: key);
 
-  /// Name of the product
-  final String name;
-
-  /// Price of the product
-  final double price;
+  /// The product
+  final Sneaker sneaker;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +31,7 @@ class ShoeCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          name,
+                          sneaker.name,
                           style: TextStyle(
                             fontFamily: 'Inter',
                             color: Color(0xFF000000),
@@ -56,7 +50,7 @@ class ShoeCard extends StatelessWidget {
                               color: Colors.black,
                             ),
                             Text(
-                              '$price lei',
+                              '${sneaker.price} lei',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 color: Color(0xFF000000),
@@ -86,10 +80,11 @@ class ShoeCard extends StatelessWidget {
                         ),
                       ),
                       SvgPicture.asset(
-                          'assets/svg/isNotLiked.svg', //: 'assets/svg/isLiked.svg',
-                          height: 50,
-                          width: 50,
-                          color: Colors.red),
+                        'assets/svg/isNotLiked.svg', //: 'assets/svg/isLiked.svg',
+                        height: 50,
+                        width: 50,
+                        color: Colors.red,
+                      ),
                       Container(
                         height: 36,
                         width: 60,
@@ -116,8 +111,11 @@ class ShoeCard extends StatelessWidget {
                   height: 112,
                   width: 181,
                   decoration: BoxDecoration(
-                    color: Colors.red,
                     borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    child: Image.network(sneaker.imageLink),
                   ),
                 ),
                 Positioned(

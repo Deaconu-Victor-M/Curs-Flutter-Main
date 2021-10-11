@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoeapp/models/sneaker.dart';
 import 'package:shoeapp/services/apiService.dart';
+import 'package:shoeapp/widgets/shoecard.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({Key? key}) : super(key: key);
@@ -59,6 +60,6 @@ class _ProductListState extends State<ProductList> {
       return Text('fail.');
     }
 
-    return Text(_sneakers![index].toString());
+    return ShoeCard(sneaker: _sneakers![index]);
   }
 }
