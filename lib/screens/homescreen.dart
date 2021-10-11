@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shoeapp/services/apiService.dart';
 import 'package:shoeapp/widgets/shoecard.dart';
 
 class HomePage extends StatefulWidget {
@@ -112,6 +113,25 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
+
+            /// vvv TEMPORARY vvv
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (_, i) {
+                  return ElevatedButton(
+                    onPressed: () async {
+                      final res = await APIService.getAllSneakers();
+                      res?.forEach((s) {
+                        print(s);
+                      });
+                    },
+                    child: Text('Test API'),
+                  );
+                },
+                childCount: 1,
+              ),
+            ),
+            
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (_, i) {
