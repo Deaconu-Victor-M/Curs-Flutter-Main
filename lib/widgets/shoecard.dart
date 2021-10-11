@@ -26,10 +26,12 @@ class ShoeCard extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 35, top: 110),
+                    padding: const EdgeInsets.only(left: 35),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        ProductImage(sneaker: sneaker),
                         Text(
                           sneaker.name,
                           style: TextStyle(
@@ -102,48 +104,48 @@ class ShoeCard extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            top: -40,
-            left: 30,
-            child: Stack(
-              children: [
-                Container(
-                  height: 112,
-                  width: 181,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: FittedBox(
-                    fit: BoxFit.cover,
-                    child: Image.network(sneaker.imageLink),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: 70,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: [0.3, 1],
-                        colors: [
-                          Theme.of(context)
-                              .scaffoldBackgroundColor
-                              .withOpacity(0.0),
-                          Colors.white
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
+    );
+  }
+}
+
+class ProductImage extends StatelessWidget {
+  const ProductImage({Key? key, required this.sneaker}) : super(key: key);
+
+  final Sneaker sneaker;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.network(
+            sneaker.imageLink,
+            width: MediaQuery.of(context).size.width * 0.45,
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 70,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.3, 1],
+                colors: [
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0),
+                  Colors.white
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
