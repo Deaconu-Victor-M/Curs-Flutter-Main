@@ -24,138 +24,119 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBody: false,
       backgroundColor: Color(0xFFF5F5F5),
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        toolbarHeight: 100,
+        backgroundColor: Color(0xFFF5F5F5),
+        title: Text(
+          'Home',
+          style: TextStyle(
+            fontFamily: 'Inter',
+            color: Colors.black,
+            fontSize: 45,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        leadingWidth: 70,
+        leading: Padding(
+          padding: const EdgeInsets.only(
+            left: 20,
+            top: 25,
+            bottom: 25,
+          ),
+          child: Container(
+            //height: 30,
+            //width: 30,
+            padding: EdgeInsets.all(9),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: SvgPicture.asset('assets/svg/menu.svg'),
+          ),
+        ),
+      ),
       body: SafeArea(
-        child: CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          slivers: [
-            SliverAppBar(
-              floating: true,
-              centerTitle: true,
-              pinned: true,
-              elevation: 0,
-              collapsedHeight: 80,
-              expandedHeight: 240,
-              backgroundColor: Color(0xFFF5F5F5),
-              title: Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Text(
-                  'Home',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    color: Colors.black,
-                    fontSize: 45,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              leadingWidth: 60,
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 20, top: 20, bottom: 0),
-                child: Container(
-                  padding: EdgeInsets.all(7),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: SvgPicture.asset('assets/svg/menu.svg'),
-                ),
-              ),
-              flexibleSpace: Padding(
-                padding: const EdgeInsets.only(top: 100, left: 20),
-                child: Text(
-                  'Discover \nshoes weekly',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    color: Color(0xFF6C6DDE),
-                    fontSize: 45,
-                    fontWeight: FontWeight.w400,
-                  ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 20),
+              child: Text(
+                'Discover \nshoes weekly',
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  color: Color(0xFF6C6DDE),
+                  fontSize: 45,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
             ),
-            SliverAppBar(
-              elevation: 0,
-              pinned: true,
-              backgroundColor: Color(0xFFF5F5F5),
-              toolbarHeight: 40,
-              flexibleSpace: ListView.builder(
-                physics: BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics(),
-                ),
-                scrollDirection: Axis.horizontal,
-                itemCount: category.length,
-                itemBuilder: (context, i) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = i;
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 45, right: 15),
-                      child: Column(
-                        children: [
-                          Text(
-                            category[i],
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              color: Color(0xFF000000),
-                              fontSize: 25,
-                              fontWeight: selectedIndex == i
-                                  ? FontWeight.bold
-                                  : FontWeight.w400,
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Container(
+                height: 40,
+                width: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: category.length,
+                  itemBuilder: (context, i) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedIndex = i;
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 45, right: 15),
+                        child: Column(
+                          children: [
+                            Text(
+                              category[i],
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                color: Color(0xFF000000),
+                                fontSize: 25,
+                                fontWeight: selectedIndex == i
+                                    ? FontWeight.bold
+                                    : FontWeight.w400,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
 
-            /// vvv TEMPORARY vvv
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (_, i) {
-                  return Column(
-                    children: [
-                      ElevatedButton(
-                        onPressed: () async {
-                          final res = await APIService.getAllSneakers();
-                          res?.forEach((s) {
-                            print(s);
-                          });
-                        },
-                        child: Text('Test API - /sneakers'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          final res = await APIService.getSneakerByID(
-                            '0aSysLyb70pFJ4wqzq3b',
-                          );
-                          print('$res w/ desc & url, url: ${res?.pageUrl}');
-                        },
-                        child: Text('Test API - /sneaker/id'),
-                      )
-                    ],
-                  );
-                },
-                childCount: 1,
-              ),
-            ),
-
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (_, i) {
-                  return ShoeCard(
-                    name: 'Rebook\nNano X Black',
-                    price: 267.99,
-                  );
-                },
-                childCount: 5,
-              ),
-            ),
+            // CustomScrollView(
+            //   physics: BouncingScrollPhysics(),
+            //   slivers: [
+            //     SliverAppBar(
+            //       elevation: 0,
+            //       pinned: true,
+            //       backgroundColor: Color(0xFFF5F5F5),
+            //       toolbarHeight: 40,
+            //     ),
+            //     SliverList(
+            //       delegate: SliverChildBuilderDelegate(
+            //         (_, i) {
+            //           return ShoeCard(
+            //             name: 'Rebook\nNano X Black',
+            //             price: 267.99,
+            //           );
+            //         },
+            //         childCount: 5,
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
