@@ -118,20 +118,33 @@ class _HomePageState extends State<HomePage> {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (_, i) {
-                  return ElevatedButton(
-                    onPressed: () async {
-                      final res = await APIService.getAllSneakers();
-                      res?.forEach((s) {
-                        print(s);
-                      });
-                    },
-                    child: Text('Test API'),
+                  return Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () async {
+                          final res = await APIService.getAllSneakers();
+                          res?.forEach((s) {
+                            print(s);
+                          });
+                        },
+                        child: Text('Test API - /sneakers'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          final res = await APIService.getSneakerByID(
+                            '0aSysLyb70pFJ4wqzq3b',
+                          );
+                          print('$res w/ desc & url, url: ${res?.pageUrl}');
+                        },
+                        child: Text('Test API - /sneaker/id'),
+                      )
+                    ],
                   );
                 },
                 childCount: 1,
               ),
             ),
-            
+
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (_, i) {
