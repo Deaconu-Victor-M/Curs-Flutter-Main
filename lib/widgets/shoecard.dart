@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shoeapp/models/sneaker.dart';
 
 class ShoeCard extends StatelessWidget {
-  const ShoeCard({
-    Key? key,
-    required this.name,
-    required this.price,
-  }) : super(key: key);
+  const ShoeCard({Key? key, required this.sneaker}) : super(key: key);
 
-  /// Name of the product
-  final String name;
-
-  /// Price of the product
-  final double price;
+  /// The product
+  final Sneaker sneaker;
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +26,14 @@ class ShoeCard extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 35, top: 110),
+                    padding: const EdgeInsets.only(left: 35),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        ProductImage(sneaker: sneaker),
                         Text(
-                          name,
+                          sneaker.name,
                           style: TextStyle(
                             fontFamily: 'Inter',
                             color: Color(0xFF000000),
@@ -56,7 +52,7 @@ class ShoeCard extends StatelessWidget {
                               color: Colors.black,
                             ),
                             Text(
-                              '$price lei',
+                              '${sneaker.price} lei',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 color: Color(0xFF000000),
@@ -86,10 +82,11 @@ class ShoeCard extends StatelessWidget {
                         ),
                       ),
                       SvgPicture.asset(
-                          'assets/svg/isNotLiked.svg', //: 'assets/svg/isLiked.svg',
-                          height: 50,
-                          width: 50,
-                          color: Colors.red),
+                        'assets/svg/isNotLiked.svg', //: 'assets/svg/isLiked.svg',
+                        height: 50,
+                        width: 50,
+                        color: Colors.red,
+                      ),
                       Container(
                         height: 36,
                         width: 60,
@@ -107,45 +104,48 @@ class ShoeCard extends StatelessWidget {
               ],
             ),
           ),
-          Positioned(
-            top: -40,
-            left: 30,
-            child: Stack(
-              children: [
-                Container(
-                  height: 112,
-                  width: 181,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: 70,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: [0.3, 1],
-                        colors: [
-                          Theme.of(context)
-                              .scaffoldBackgroundColor
-                              .withOpacity(0.0),
-                          Colors.white
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
+    );
+  }
+}
+
+class ProductImage extends StatelessWidget {
+  const ProductImage({Key? key, required this.sneaker}) : super(key: key);
+
+  final Sneaker sneaker;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.network(
+            sneaker.imageLink,
+            width: MediaQuery.of(context).size.width * 0.45,
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 70,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.3, 1],
+                colors: [
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0),
+                  Colors.white
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
