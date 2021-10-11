@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shoeapp/services/apiService.dart';
-import 'package:shoeapp/widgets/shoecard.dart';
+import 'package:shoeapp/components/appBar.dart';
+import 'package:shoeapp/components/productList.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,39 +23,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBody: false,
       backgroundColor: Color(0xFFF5F5F5),
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        toolbarHeight: 100,
-        backgroundColor: Color(0xFFF5F5F5),
-        title: Text(
-          'Home',
-          style: TextStyle(
-            fontFamily: 'Inter',
-            color: Colors.black,
-            fontSize: 45,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        leadingWidth: 70,
-        leading: Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-            top: 25,
-            bottom: 25,
-          ),
-          child: Container(
-            //height: 30,
-            //width: 30,
-            padding: EdgeInsets.all(9),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: SvgPicture.asset('assets/svg/menu.svg'),
-          ),
-        ),
-      ),
+      appBar: CustomAppBar(),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,28 +82,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            // CustomScrollView(
-            //   physics: BouncingScrollPhysics(),
-            //   slivers: [
-            //     SliverAppBar(
-            //       elevation: 0,
-            //       pinned: true,
-            //       backgroundColor: Color(0xFFF5F5F5),
-            //       toolbarHeight: 40,
-            //     ),
-            //     SliverList(
-            //       delegate: SliverChildBuilderDelegate(
-            //         (_, i) {
-            //           return ShoeCard(
-            //             name: 'Rebook\nNano X Black',
-            //             price: 267.99,
-            //           );
-            //         },
-            //         childCount: 5,
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            /// "Main" product list
+            ProductList(),
           ],
         ),
       ),
