@@ -17,10 +17,10 @@ class _HomePageState extends State<HomePage> {
     'Nike',
     'Reebok',
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(),
       extendBody: false,
       backgroundColor: Color(0xFFF5F5F5),
       appBar: CustomAppBar(),
@@ -54,9 +54,11 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context, i) {
                     return GestureDetector(
                       onTap: () {
-                        setState(() {
-                          selectedIndex = i;
-                        });
+                        setState(
+                          () {
+                            selectedIndex = i;
+                          },
+                        );
                       },
                       child: Container(
                         padding: const EdgeInsets.only(left: 45, right: 15),

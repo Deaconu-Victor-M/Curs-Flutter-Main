@@ -26,7 +26,7 @@ class ShoeCard extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 35),
+                    padding: const EdgeInsets.only(left: 35, bottom: 25),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
@@ -62,7 +62,7 @@ class ShoeCard extends StatelessWidget {
                               ),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),

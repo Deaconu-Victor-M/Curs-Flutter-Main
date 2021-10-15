@@ -45,6 +45,7 @@ class _ProductListState extends State<ProductList> {
           } else {
             return Expanded(
               child: ListView.builder(
+                physics: BouncingScrollPhysics(),
                 itemCount: _sneakers?.length,
                 itemBuilder: buildListView,
               ),

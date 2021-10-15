@@ -25,7 +25,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       leadingWidth: 70,
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Scaffold.of(context).openDrawer();
+        },
         icon: SvgPicture.asset('assets/svg/menu.svg'),
       ),
     );
