@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     'All',
     'Adidas',
     'Nike',
-    'Reedbok',
+    'Reebok',
   ];
 
   @override
