@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shoeapp/models/sneaker.dart';
+import 'package:shoeapp/services/favoritesService.dart';
 
-class ShoeCard extends StatelessWidget {
-  const ShoeCard({Key? key, required this.sneaker}) : super(key: key);
+class ShoeCard extends StatefulWidget {
+  const ShoeCard({
+    Key? key,
+    required this.sneaker,
+    required this.isFavorite,
+  }) : super(key: key);
 
   /// The product
   final Sneaker sneaker;
+
+  final bool isFavorite;
+
+  @override
+  State<ShoeCard> createState() => _ShoeCardState();
+}
+
+class _ShoeCardState extends State<ShoeCard> {
+  bool _isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _isFavorite = widget.isFavorite;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +54,7 @@ class ShoeCard extends StatelessWidget {
                       //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          sneaker.name,
+                          widget.sneaker.name,
                           style: TextStyle(
                             fontFamily: 'Inter',
                             color: Color(0xFF000000),
@@ -53,7 +73,7 @@ class ShoeCard extends StatelessWidget {
                               color: Colors.black,
                             ),
                             Text(
-                              '${sneaker.price} lei',
+                              '${widget.sneaker.price} lei',
                               style: TextStyle(
                                 fontFamily: 'Inter',
                                 color: Color(0xFF000000),
@@ -82,11 +102,32 @@ class ShoeCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SvgPicture.asset(
-                        'assets/svg/isNotLiked.svg', //: 'assets/svg/isLiked.svg',
-                        height: 50,
-                        width: 50,
-                        color: Colors.red,
+                      FloatingActionButton(
+                        backgroundColor: Colors.white,
+                        elevation: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 10.0,
+                            bottom: 8.0,
+                            left: 8.0,
+                            right: 8.0,
+                          ),
+                          child: SvgPicture.asset(
+                            _isFavorite
+                                ? 'assets/svg/isLiked.svg'
+                                : 'assets/svg/isNotLiked.svg',
+                            height: 50,
+                            width: 50,
+                            color: Colors.red,
+                          ),
+                        ),
+                        onPressed: () async {
+                          _isFavorite = !_isFavorite;
+                          setState(() {});
+                          final ids = await FavoritesService.getFavorites();
+                          ids.add(widget.sneaker.id);
+                          await FavoritesService.setFavorites(ids);
+                        },
                       ),
                       Container(
                         height: 36,
@@ -107,7 +148,7 @@ class ShoeCard extends StatelessWidget {
           ),
           Positioned(
             top: -50,
-            child: ProductImage(sneaker: sneaker),
+            child: ProductImage(sneaker: widget.sneaker),
           ),
         ],
       ),
@@ -139,21 +180,6 @@ class ProductImage extends StatelessWidget {
               ),
             ),
           ),
-          // SizedBox(
-          //   height: MediaQuery.of(context).size.height * 0.16,
-          //   width: MediaQuery.of(context).size.width * 0.5,
-          //   child: FittedBox(
-          //     fit: BoxFit.scaleDown,
-          //     child: ClipRRect(
-          //       //clipBehavior: Clip.hardEdge,
-          //       borderRadius: BorderRadius.circular(20),
-          //       child: Image.network(
-          //         sneaker.imageLink,
-          //         //width: MediaQuery.of(context).size.width * 0.50,
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Positioned(
             bottom: 0,
             left: 0,

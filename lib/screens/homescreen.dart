@@ -4,6 +4,7 @@ import 'package:shoeapp/components/loading.dart';
 import 'package:shoeapp/components/productList.dart';
 import 'package:shoeapp/models/sneaker.dart';
 import 'package:shoeapp/services/apiService.dart';
+import 'package:shoeapp/services/favoritesService.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,17 +23,26 @@ class _HomePageState extends State<HomePage> {
   ];
 
   bool _isLoading = true;
+  List<String> _favorites = [];
   List<Sneaker>? _sneakers = [];
 
   @override
   void initState() {
     super.initState();
+
     print("----- Getting sneakers -----");
     APIService.getAllSneakers().then((sneakers) {
       _sneakers = sneakers;
       _isLoading = false;
       setState(() {});
-      print("----- Done -----");
+      print("----- Sneakers::Done -----");
+    });
+
+    print("----- Getting favorites -----");
+    FavoritesService.getFavorites().then((favorites) {
+      _favorites = favorites;
+      setState(() {});
+      print("----- Favorites::Done -----");
     });
   }
 
@@ -131,6 +141,7 @@ class _HomePageState extends State<HomePage> {
                     sneakers: _getSneakersForCategory(
                       _category[_selectedIndex],
                     ),
+                    favorites: _favorites,
                   ),
                 ],
               ),

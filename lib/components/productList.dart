@@ -3,15 +3,31 @@ import 'package:shoeapp/models/sneaker.dart';
 import 'package:shoeapp/widgets/shoecard.dart';
 
 class ProductList extends StatefulWidget {
-  const ProductList({Key? key, required this.sneakers}) : super(key: key);
+  const ProductList({
+    Key? key,
+    required this.sneakers,
+    required this.favorites,
+  }) : super(key: key);
 
   final List<Sneaker>? sneakers;
+
+  final List<String> favorites;
 
   @override
   _ProductListState createState() => _ProductListState();
 }
 
 class _ProductListState extends State<ProductList> {
+  bool _isInFavoritesList(String id) {
+    bool found = false;
+    widget.favorites.forEach((favId) {
+      if (favId == id) {
+        found = true;
+      }
+    });
+    return found;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.sneakers == null) {
@@ -40,6 +56,9 @@ class _ProductListState extends State<ProductList> {
       return Text('fail.');
     }
 
-    return ShoeCard(sneaker: widget.sneakers![index]);
+    return ShoeCard(
+      sneaker: widget.sneakers![index],
+      isFavorite: _isInFavoritesList(widget.sneakers![index].id),
+    );
   }
 }
