@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoeapp/components/appBar.dart';
+import 'package:shoeapp/components/loading.dart';
 import 'package:shoeapp/components/productList.dart';
 import 'package:shoeapp/models/sneaker.dart';
 import 'package:shoeapp/services/apiService.dart';
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color(0xFFF5F5F5),
       appBar: CustomAppBar(),
       body: _isLoading
-          ? CircularProgressIndicator()
+          ? Loading()
           : SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, top: 20),
                     child: Text(
-                      'Discover \nshoes weekly',
+                      'Discover\nshoes weekly',
                       style: TextStyle(
                         fontFamily: 'Inter',
                         color: Color(0xFF6C6DDE),
