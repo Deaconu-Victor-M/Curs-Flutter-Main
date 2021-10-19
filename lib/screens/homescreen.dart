@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shoeapp/components/appBar.dart';
 import 'package:shoeapp/components/loading.dart';
 import 'package:shoeapp/components/productList.dart';
@@ -70,7 +71,7 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(),
       extendBody: false,
       backgroundColor: Color(0xFFF5F5F5),
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(type: "home"),
       body: _isLoading
           ? Loading()
           : SafeArea(
