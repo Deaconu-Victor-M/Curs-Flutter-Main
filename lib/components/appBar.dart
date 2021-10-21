@@ -16,6 +16,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         return "Home";
       case "favorites":
         return "Favorites";
+      case "detail":
+        return "Details";
       default:
         return "Unknown";
     }
@@ -26,6 +28,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       case "home":
         return 'assets/svg/menu.svg';
       case "favorites":
+        return 'assets/svg/arrow-left.svg';
+      case "detail":
         return 'assets/svg/arrow-left.svg';
       default:
         return "Unknown";
@@ -44,8 +48,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         style: TextStyle(
           fontFamily: 'Inter',
           color: Colors.black,
-          fontSize: 45,
-          fontWeight: FontWeight.w600,
+          fontSize: 40,
+          fontWeight: FontWeight.w500,
         ),
       ),
       leadingWidth: 70,
@@ -58,6 +62,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
             case "favorites":
               Navigator.pop(context);
               break;
+            case "detail":
+              Navigator.pop(context);
+              break;
             default:
               throw Exception("Not implemented");
           }
@@ -67,7 +74,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       actions: type == 'home'
           ? [
               Padding(
-                padding: const EdgeInsets.all(6.0),
+                padding: const EdgeInsets.all(8.0),
                 child: FloatingActionButton(
                   onPressed: () {
                     Navigator.of(context).push(
@@ -85,7 +92,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                     ),
                     child: SvgPicture.asset(
                       'assets/svg/isNotLiked.svg',
-                      color: Colors.black.withAlpha(80),
+                      color: Colors.white.withAlpha(150),
                     ),
                   ),
                   backgroundColor: Colors.grey.withAlpha(100),
