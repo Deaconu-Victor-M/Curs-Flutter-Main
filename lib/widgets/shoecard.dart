@@ -64,13 +64,13 @@ class _ShoeCardState extends State<ShoeCard> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 35, bottom: 25),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.end,
                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            widget.sneaker.name,
+                            '${widget.sneaker.brand.capitalize()}\n${widget.sneaker.name}',
                             style: TextStyle(
                               fontFamily: 'Inter',
                               color: Color(0xFF000000),
