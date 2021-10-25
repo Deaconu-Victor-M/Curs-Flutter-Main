@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shoeapp/components/appBar.dart';
 import 'package:shoeapp/components/loading.dart';
+import 'package:shoeapp/helpers/stringExtensions.dart';
 import 'package:shoeapp/models/sneaker.dart';
 import 'package:shoeapp/services/apiService.dart';
 import 'package:shoeapp/widgets/shoecard.dart';
@@ -11,23 +12,27 @@ class DetailScreen extends StatefulWidget {
   const DetailScreen({
     Key? key,
     required this.sneaker,
+    this.skipFetch = false,
   }) : super(key: key);
+
   final Sneaker sneaker;
+
+  /// If true, do not call the API (assume we have all the details in [sneaker])
+  final bool skipFetch;
+
   @override
   _DetailScreenState createState() => _DetailScreenState();
-}
-
-extension StringExtension on String {
-  String capitalize() {
-    return "${this[0].toUpperCase()}${this.substring(1)}";
-  }
 }
 
 class _DetailScreenState extends State<DetailScreen> {
   Sneaker? _currentSneaker;
 
   Future<void> _getSneakerDetails() async {
-    _currentSneaker = await APIService.getSneakerByID(widget.sneaker.id);
+    if (widget.skipFetch) {
+      _currentSneaker = widget.sneaker;
+    } else {
+      _currentSneaker = await APIService.getSneakerByID(widget.sneaker.id);
+    }
   }
 
   Widget _buildButton() {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shoeapp/helpers/stringExtensions.dart';
 import 'package:shoeapp/models/sneaker.dart';
 import 'package:shoeapp/screens/detailScreen.dart';
 import 'package:shoeapp/services/favoritesService.dart';
