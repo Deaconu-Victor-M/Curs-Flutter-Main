@@ -119,7 +119,8 @@ class _ShoeCardState extends State<ShoeCard> {
                           ),
                         ),
                         FloatingActionButton(
-                          //key: 'fb-${widget.sneaker.id}',
+                          // Each FAB requires a unique heroTag
+                          heroTag: '${widget.sneaker.id}-fab',
                           backgroundColor: Colors.white,
                           elevation: 2,
                           child: Padding(

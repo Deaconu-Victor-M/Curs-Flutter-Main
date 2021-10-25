@@ -76,6 +76,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: FloatingActionButton(
+                  // Each FAB requires a unique heroTag
+                  heroTag: '$type-fab',
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
